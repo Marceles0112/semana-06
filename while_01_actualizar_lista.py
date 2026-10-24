@@ -10,10 +10,9 @@ puntajes = [72, 85, 90]
 indice = 0
 
 while indice < len(puntajes):
-    # TODO: actualice el puntaje de esta posición dividiéndolo entre 100.
-    pass
-
-    indice += 1
+  puntajes[indice] = puntajes[indice] / 100
+  indice += 1
+    # TODO: actualice el puntaje de esta posición dividiéndolo entre 100.indice += 1
 
 print("Puntajes normalizados:", puntajes)
 
