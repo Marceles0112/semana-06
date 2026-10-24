@@ -1,7 +1,7 @@
 """Reto integrador: control de ingreso al Anfiteatro del CENAC.
 
-Nombre del estudiante: __________________________________________
-Fecha: ____________________
+Nombre del estudiante: María Celeste Madrigal Vargas 
+Fecha: 24/10/2026
 
 Contexto:
 Se analizará el ingreso de grupos a un evento en el Anfiteatro del CENAC, Costa Rica.
@@ -103,3 +103,71 @@ Otros casos para probar:
 
 
 # Desarrolle su solución a partir de esta línea.
+capacidad = 700
+grupos_aceptados = []
+grupos_rechazados = []
+ocupacion = 0
+
+entrada = input("Ingrese el grupo o escriba fin: ").strip().lower()
+
+while entrada != "fin":
+    try:
+        grupo = int(entrada)
+
+        if grupo <= 0:
+            print("Entrada invalida: ingrese un entero positivo.")
+
+        elif ocupacion + grupo <= capacidad:
+            grupos_aceptados.append(grupo)
+            ocupacion += grupo
+            print("Grupo aceptado:", grupo)
+            print("Ocupacion actual:", ocupacion)
+            print("Espacios disponibles:", capacidad - ocupacion)
+
+        else:
+            grupos_rechazados.append(grupo)
+            print("Grupo rechazado:", grupo)
+            print("Ocupacion actual:", ocupacion)
+            print("Espacios disponibles:", capacidad - ocupacion)
+
+    except ValueError:
+        print("Entrada invalida: escriba un entero positivo o fin.")
+
+    entrada = input("Ingrese el grupo o escriba fin: ").strip().lower()
+
+total_admitido = 0
+
+for grupo in grupos_aceptados:
+    total_admitido += grupo
+
+print("REPORTE FINAL")
+print("Grupos aceptados:", len(grupos_aceptados))
+print("Grupos rechazados:", len(grupos_rechazados))
+print("Personas admitidas:", total_admitido)
+print("Capacidad maxima:", capacidad)
+print("Espacios disponibles:", capacidad - total_admitido)
+
+if total_admitido > 0:
+    porcentaje = total_admitido / capacidad * 100
+    print(f"Porcentaje de ocupacion: {porcentaje:.2f}%")
+
+    menor = grupos_aceptados[0]
+    mayor = grupos_aceptados[0]
+
+    for grupo in grupos_aceptados:
+        if grupo < menor:
+            menor = grupo
+        if grupo > mayor:
+            mayor = grupo
+
+    print("Grupo aceptado mas pequeno:", menor)
+    print("Grupo aceptado mas grande:", mayor)
+else:
+    print("No hubo personas admitidas.")
+
+if total_admitido == capacidad:
+    print("Estado final: capacidad completa.")
+elif total_admitido == 0:
+    print("Estado final: sin ocupacion.")
+else:
+    print("Estado final: ocupacion normal.")
